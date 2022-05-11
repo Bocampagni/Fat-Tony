@@ -9,6 +9,13 @@ class graph:
 
     def getEdges(self):
         return list(self.gdict.values())
+    
+    def getGraphSize(self):
+        amountOfEdges = 0
+        for edge in self.getEdges():
+            amountOfEdges+= len(edge)
+
+        return len(self.getVertices()) + amountOfEdges
 
 graph_elements = { 
    "a" : ["b","c"],
@@ -18,5 +25,6 @@ graph_elements = {
    "e" : ["d"]
 }
 g = graph(graph_elements)
-print("Edges:", g.getEdges()) 
+print("Edges: ", g.getEdges()) 
 print("Vertices: ", g.getVertices())
+print("Size: ", g.getGraphSize())
