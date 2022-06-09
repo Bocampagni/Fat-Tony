@@ -1,4 +1,4 @@
-class graph:
+class main:
     def __init__(self, gdict=None):
         if gdict is None:
             gdict = []
@@ -24,7 +24,7 @@ graph_elements = {
    "d" : ["e"],
    "e" : ["d"]
 }
-g = graph(graph_elements)
+g = main(graph_elements)
 print("Edges: ", g.getEdges()) 
 print("Vertices: ", g.getVertices())
 print("Size: ", g.getGraphSize())
