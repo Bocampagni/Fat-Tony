@@ -10,15 +10,19 @@ public class Grafo {
 
     private Map<Integer, Set<Integer>> vizinhosDeSaidaPorVertice;
     private Map<Integer, Set<Integer>> vizinhosDeEntradaPorVertice;
-
+    private List<Integer> cor;
     private int quantVertices;
     private int quantArestas;
+
+    public Grafo(){};
+
+
 
     public Grafo(int n) {
         this.quantVertices = n;
         this.vizinhosDeSaidaPorVertice = new HashMap<>();
         this.vizinhosDeEntradaPorVertice = new HashMap<>();
-
+        this.cor = new ArrayList<>();
         for (int i = 1; i <= n; i++) {
             this.vizinhosDeSaidaPorVertice.put(i, new HashSet<>());
             this.vizinhosDeEntradaPorVertice.put(i, new HashSet<>());
@@ -123,5 +127,13 @@ public class Grafo {
         }
 
         return null;  // não é um DAG!!!
+    }
+
+    public void colorir(int cor, int pos){
+        this.cor.set(pos, cor);
+    }
+
+    public List<Integer> getList(){
+        return this.cor;
     }
 }
