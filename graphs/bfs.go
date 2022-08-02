@@ -1,49 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 func main() {
-	var a = [][]int{
-		{0, 1, 2, 3},   /*  initializers for row indexed by 0 */
-		{4, 5, 6, 7},   /*  initializers for row indexed by 1 */
-		{8, 9, 10, 11}, /*  initializers for row indexed by 2 */
-	}
-	multiplyMatrix(a, 5)
-	makeDiagonalZero(a)
-	printMatrix(a, 3, 4)
-}
 
-func printMatrix(matrix [][]int, row int, col int) {
-	var i, j int
-	for i = 0; i < row; i++ {
-		for j = 0; j < col; j++ {
-			fmt.Printf("a[%d][%d] = %d\n", i, j, matrix[i][j])
-		}
-	}
-}
-
-func multiplyMatrix(matrix [][]int, scale int) [][]int {
-	var i, j int
-
-	for i = 0; i < 3; i++ {
-		for j = 0; j < 4; j++ {
-			matrix[i][j] = matrix[i][j] * scale
-		}
+	type graph struct {
+		V []int
+		E map[int][]int
 	}
 
-	return matrix
-}
+	grafo := new(graph)
+	grafo.E = make(map[int][]int)
+	grafo.V = []int{0, 1, 2, 3, 4}
+	grafo.E[0] = []int{1, 2, 4}
+	grafo.E[1] = []int{2, 4}
+	grafo.E[2] = []int{0, 4}
+	grafo.E[3] = []int{1, 2, 4}
+	grafo.E[4] = []int{1}
 
-func makeDiagonalZero(matrix [][]int) [][]int {
-	var i, j int
+	grafo1, _ := json.Marshal(grafo)
+	fmt.Println(string(grafo1))
 
-	for i = 0; i < 3; i++ {
-		for j = 0; j < 4; j++ {
-			if i == j {
-				matrix[i][j] = 0
-			}
-		}
-	}
-
-	return matrix
 }
