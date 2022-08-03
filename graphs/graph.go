@@ -1,6 +1,8 @@
 package main
 
 type Graph struct {
+	V []int
+	E map[int][]int
 }
 
 type DGraph struct {
