@@ -1,21 +1,23 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 func main() {
 
-	graph := new(Graph)
-	graph.E = make(map[int][]int)
-	graph.V = []int{0, 1, 2, 3, 4}
-	graph.E[0] = []int{1, 2, 4}
-	graph.E[1] = []int{2, 4}
-	graph.E[2] = []int{0, 4}
-	graph.E[3] = []int{1, 2, 4}
-	graph.E[4] = []int{1}
+	graph := CreateGraph(7)
+	//graph.E[0] = []*node{&graph.V[1]}
+	//graph.E[1] = []*node{&graph.V[0], &graph.V[2], &graph.V[3]}
+	//graph.E[2] = []*node{&graph.V[1]}
+	//graph.E[3] = []*node{&graph.V[0]}
+	graph.E[0] = []*node{&graph.V[2], &graph.V[3], &graph.V[4]}
+	graph.E[1] = []*node{&graph.V[2], &graph.V[4], &graph.V[6]}
+	graph.E[2] = []*node{&graph.V[4]}
+	graph.E[3] = []*node{&graph.V[4], &graph.V[5]}
+	graph.E[4] = []*node{&graph.V[5]}
+	graph.E[5] = []*node{&graph.V[1]}
+	graph.E[6] = []*node{}
 
-	grafo1, _ := json.Marshal(graph)
-	fmt.Println(string(grafo1))
+	Bfs(graph)
+
+	//grafo1, _ := json.Marshal(graph)
+	//
+	//fmt.Println(string(grafo1))
 }
