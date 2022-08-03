@@ -2,7 +2,6 @@ package main
 
 import (
 	"container/list"
-	"fmt"
 )
 
 func Bfs(graph *Graph) {
@@ -30,8 +29,6 @@ func Bfs(graph *Graph) {
 			break
 		}
 	}
-
-	fmt.Printf("%#v", *graph)
 }
 
 func BfsVisit(graph *Graph, node *node, time *int, queue *list.List) {
