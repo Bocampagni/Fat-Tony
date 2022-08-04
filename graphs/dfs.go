@@ -23,6 +23,7 @@ func DfsVisit(graph *Graph, node *node) {
 		if element.color == 0 {
 			element.color = 1
 			element.parent = node.id
+			DfsVisit(graph, element)
 		}
 	}
 }
