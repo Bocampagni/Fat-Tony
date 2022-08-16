@@ -7,9 +7,26 @@ type node struct {
 	time   int
 }
 
+type edge struct {
+	source  *node
+	destiny *node
+	weight  int
+}
+
 type Graph struct {
 	V []node          `json:"node"`
 	E map[int][]*node `json:"edge"`
+}
+
+type WGraph struct {
+	V []node
+	E [][]edge
+}
+
+type Network struct {
+}
+
+type OSMGraph struct {
 }
 
 func CreateGraph(size int) *Graph {
@@ -18,13 +35,4 @@ func CreateGraph(size int) *Graph {
 	graph.E = make(map[int][]*node)
 
 	return graph
-}
-
-type DGraph struct {
-}
-
-type Network struct {
-}
-
-type OSMGraph struct {
 }
