@@ -206,16 +206,26 @@ var armMatrix = new Matrix4().setTranslate(0, -5, 0);
 var handMatrix = new Matrix4().setTranslate(0, -4, 0);
 /**  @type {Matrix4} */
 var headMatrix = new Matrix4().setTranslate(0, 7, 0);
+
+var legMatrix = new Matrix4().setTranslate(-2, -11, 0);
+var legLeftMatrix = new Matrix4().setTranslate(2, -11, 0);
+var feetMatrix = new Matrix4().setTranslate(0, -7, 0);
+
 var torsoAngle = 0.0;
 var shoulderAngle = 0.0;
 var armAngle = 0.0;
 var handAngle = 0.0;
 var headAngle = 0.0;
+var legAngle = 0.0;
+var feetAngle = 0.0;
+
 var torsoMatrixLocal = new Matrix4().setScale(10, 10, 5);
 var shoulderMatrixLocal = new Matrix4().setScale(3, 5, 2);
 var armMatrixLocal = new Matrix4().setScale(3, 5, 2);
 var handMatrixLocal = new Matrix4().setScale(1, 3, 3);
 var headMatrixLocal = new Matrix4().setScale(4, 4, 4);
+var legMatrixLocal = new Matrix4().setScale(3, 12, 2);
+var feetMatrixLocal = new Matrix4().setScale(3, 0.5, 3);
 /**
  * View matrix.
  * @type {Matrix4}
@@ -271,6 +281,7 @@ function handleKeyPress(event) {
         .rotate(-shoulderAngle, 1, 0, 0)
         .translate(0, -2, 0);
       shoulderMatrix.setTranslate(6.5, 2, 0).multiply(currentShoulderRot);
+      shoulderLMatrix.setTranslate(-6.5, 2, 0).multiply(currentShoulderRot);
       break;
     case "S":
       shoulderAngle -= 15;
@@ -313,6 +324,30 @@ function handleKeyPress(event) {
       headAngle -= 15;
       headMatrix.setTranslate(0, 7, 0).rotate(headAngle, 0, 1, 0);
       break;
+
+    case 'f':
+      feetAngle += 15;
+      feetMatrix.setTranslate(0, -7, 0).rotate(feetAngle, 0, 1, 0);
+      break;
+    case 'F':
+      feetAngle -= 15;
+      feetMatrix.setTranslate(0, -7, 0).rotate(feetAngle, 0, 1, 0);
+      break;
+
+    case 'p':
+      legAngle += 10;
+      legLeftMatrix
+        .rotate(legAngle, 0, 1, 0);
+      legMatrix
+        .rotate(legAngle, 0, 1, 0);
+      break;
+    case 'P':
+      legAngle -= 10;
+      legLeftMatrix
+        .rotate(legAngle, 0, 1, 0);
+      legMatrix
+        .rotate(legAngle, 0, 1, 0);
+
     default:
       return;
   }
@@ -404,6 +439,27 @@ function draw() {
   s.pop();
   s.pop();
   s.pop();
+
+  // Leg relative to torso
+  s.push(new Matrix4(s.top()).multiply(legMatrix));
+  renderCube(s, legMatrixLocal, 3);
+
+  // Feet relative to leg
+  s.push(new Matrix4(s.top()).multiply(feetMatrix));
+  renderCube(s, feetMatrixLocal, 1);
+  s.pop();
+  s.pop();
+
+  s.push(new Matrix4(s.top()).multiply(legLeftMatrix));
+  renderCube(s, legMatrixLocal, 3);
+
+  // Feet relative to leg
+  s.push(new Matrix4(s.top()).multiply(feetMatrix));
+  renderCube(s, feetMatrixLocal, 1);
+  s.pop();
+  s.pop();
+
+
   // head relative to torso
   s.push(new Matrix4(s.top()).multiply(headMatrix));
   renderCube(s, headMatrixLocal);
