@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <sys/sysinfo.h>
+#include <stdbool.h>
 
-#define N 1000 // N igual à dimensão da matriz
-#define NUM_THREADS get_nprocs() // Número de threads (ajuste conforme o número de unidades de processamento)
+#define N 100 // N igual à dimensão da matriz
+#define NUM_THREADS 10 //get_nprocs(), não foi utilizado porque no meu caso retorna 12, o que implica na necessidade de tratar o restante do número de linhas, devido ao fato do N não ser divisível por 12.
 
 float a[N][N], b[N][N], c[N][N];
 
@@ -36,22 +37,33 @@ void* calculaElementoMatriz(void* args) {
     pthread_exit(NULL);
 }
 
-int main() {
-    int i, j;
-    // Inicialize as matrizes a e b (...)
-    
-    // Preencha as matrizes a e b com valores aleatórios entre 0 e 1
+bool verificarMatrizC() {
+    int i, j, k;
     for (i = 0; i < N; i++) {
         for (j = 0; j < N; j++) {
-            if ((i + j) % 2 == 0) {
-                a[i][j] = 1;
-                b[i][j] = 3;
-            } else {
-                a[i][j] = 7;
-                b[i][j] = 2;
+            float soma = 0.0;
+            for (k = 0; k < N; k++) {
+                soma += a[i][k] * b[k][j];
+            }
+            if (c[i][j] != soma) {
+                printf("c[%d][%d] = %f != %f = soma\n", i, j, c[i][j], soma);
+                return false; // Se os valores não coincidirem, a verificação falha
             }
         }
     }
+    return true; // Se a verificação passar, retorna verdadeiro
+}
+
+int main() {
+    int i, j;
+    // Inicialize as matrizes a e b (...)
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < N; j++) {
+                a[i][j] = i+j;
+                b[i][j] = 2*i+j;
+        }
+    }
+
     pthread_t threads[NUM_THREADS];
     struct ThreadArgs threadArgs[NUM_THREADS];
     
@@ -62,26 +74,27 @@ int main() {
         threadArgs[i].dim = N;
         threadArgs[i].start_row = i * rows_per_thread;
         threadArgs[i].end_row = (i + 1) * rows_per_thread;
-        pthread_create(&threads[i], NULL, calculaElementoMatriz, &threadArgs[i]);
+
+        printf("Criando a thread %d para calcular a linha %d até a linha %d.\n", i, threadArgs[i].start_row, threadArgs[i].end_row);
+        if(pthread_create(&threads[i], NULL, calculaElementoMatriz, &threadArgs[i])){
+            printf("Erro ao criar a thread %d.\n", i);
+            return -1;
+        }
     }
 
     // Aguarde as threads terminarem
     for (i = 0; i < NUM_THREADS; i++) {
-        pthread_join(threads[i], NULL);
+        if(pthread_join(threads[i], NULL)){
+            printf("Erro ao aguardar a thread %d.\n", i);
+            return -1;
+        }
     }
 
-
-    // Testar se a matriz C está correta
-    for (i = 0; i < N; i++) {
-        for (j = 0; j < N; j++) {
-            float soma = 0.0;
-            for (int k = 0; k < N; k++) {
-                soma = a[i][k] * b[k][j];
-                if (soma != c[i][j]) {
-                   printf("Soma = %f, C[%d][%d] = %f\n", soma, i, j, c[i][j]);
-                }
-            }
-        }
+    // Verifique se a matriz C foi calculada corretamente
+    if (verificarMatrizC()) {
+        printf("A matriz C foi calculada corretamente.\n");
+    } else {
+        printf("A matriz C não foi calculada corretamente.\n");
     }
 
     return 0;
