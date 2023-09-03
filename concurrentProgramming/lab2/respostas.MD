@@ -25,5 +25,3 @@ Tempo multiplicacao (dimensao 10000) (nthreads 5): 0.082710
 ```
 
 Processador do Lab: 12th Gen Intel© Core™ i3-12100 × 4
-
-obs: Posterior ao conhecimento do número de cores da máquina e da análise empirca, fica claro que não haverá ganho depois da instanciação da quarta thread pois não há mais núcleos de processamento.
