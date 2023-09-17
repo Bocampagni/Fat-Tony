@@ -1,5 +1,5 @@
 # Atividade 3
 
-A estrutura do while força que a validação daquilo que está sendo passado como argumento para o while seja testado toda vez que `pthread_cond_wait` tome o controle de volta. No caso da condicional padrão, com if, é testado apenas uma vez, o que pode gerar resultados incorretos como o valor ainda não ser múltiplo de 100.
+A estrutura while força que a validação daquilo que está sendo passado como argumento para ela seja testado toda vez que `pthread_cond_wait` toma o controle de volta. No caso da condicional padrão, com if, é testado apenas uma vez, o que pode gerar resultados incorretos como o valor ainda não ser múltiplo de 100.
 
-O while nos garante que a condição é testada em um cenário de mutex_lock, ou seja, para-se a escrita e a leitura na variável global e testa-se a condição toda vez, isso no garante a corritude do resultado.
+No limite, a validação apenas com `if` é suficiente apenas na condição de não sairmos de um estado `bom` para um `ruim`, no exemplo do código do laboratório, a condição boa é ser múltiplo de 100, a ruim, é não ser. Para usarmos o `if` com garantia de `corritude`, não poderiamos ter nenhum operador de transição de estado entre bom e ruim. Já que há, é necessário usarmos o while, que valida em todos os instantes de retorno do `pthread_cond_wait`, a condição do parâmetro sendo testado.
