@@ -39,3 +39,6 @@ lembrando que devido a elas serem `static` ela só é instanciada uma vez, tendo
 
 Sim, foi executado corretamente. O fluxo de controle com incremento modular foi suficiente para as operações de produção e consumo. A demonstração se mostrou via aproximação empírica. 
 
+### Execução da solução com o arquivo especificado dentro da pasta solution
+
+![Alt text](image.png)
