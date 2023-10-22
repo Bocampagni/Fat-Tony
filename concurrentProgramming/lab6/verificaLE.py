@@ -7,13 +7,15 @@ class LE:
 
 	def leitorBloqueado(self, id):
 		'''Recebe o id do leitor. Verifica se a decisão de bloqueio está correta.'''
-		if self.escritores == 0 and not self.escrita_pendente:
+		if self.escritores_esperando == 0 and not self.escrita_pendente:
 			print("ERRO: Leitor " + str(id) + " bloqueado quando não há escritores!")
 
 	def escritorBloqueado(self, id):
 		'''Recebe o id do escritor. Verifica se a decisão de bloqueio está correta.'''
 		if self.escritores == 0 and self.leitores == 0:
 			print("ERRO: Escritor " + str(id) + " bloqueado quando não há escritores nem leitores!")
+
+		self.escritores_esperando += 1
 
 	def leitorLendo(self, id):
 		'''Recebe o id do leitor, verifica se pode ler e registra que está lendo.'''
@@ -27,6 +29,7 @@ class LE:
 		if self.escritores > 0 or self.leitores > 0:
 			print("ERRO: Escritor " + str(id) + " está escrevendo quando há outro escritor ou leitores!")
 
+		self.escritores_esperando -= 1
 		self.escritores += 1
 
 	def leitorSaindo(self, id):
