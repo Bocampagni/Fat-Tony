@@ -19,8 +19,6 @@ def prime(n):
     return 1
 
 if __name__ == '__main__':
-    N = 1000 # Tamanho da entrada dada pelo usuario
-
     params = sys.argv
     if len(params) == 1:
         print("error: python3 prime.py <prime lenght>, i.e python3 prime.py 100")
