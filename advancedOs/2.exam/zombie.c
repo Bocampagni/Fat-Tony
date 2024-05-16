@@ -6,8 +6,8 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <string.h>
-
-#define LOG_FILE "~/zombie.log"
+#include <ctype.h>
+#define LOG_FILE "/usuarios/alunos/fabioab/zombie.log"
 #define EVER ;;
 
 void log_zombies();
@@ -16,7 +16,6 @@ void handle_sigterm(int sig);
 
 int main(int argc, char *argv[]) {
     int interval;
-
     if (argc != 2 || (interval = atoi(argv[1])) <= 0) {
         fprintf(stderr, "Uso: %s <intervalo_em_segundos>\n", argv[0]);
         exit(EXIT_FAILURE);
@@ -25,7 +24,7 @@ int main(int argc, char *argv[]) {
     daemonize();
 
     signal(SIGTERM, handle_sigterm);
-    signal(SIGCHLD, SIG_IGN); // Ignorar sinais de filho
+    signal(SIGCHLD, SIG_IGN); 
 
     for (EVER) {
         log_zombies();
@@ -69,11 +68,12 @@ void log_zombies() {
     FILE *log_file;
     DIR *proc_dir;
     struct dirent *entry;
-    char path[256], line[256];
+    char path[300], line[300];
     FILE *status_file;
 
-    log_file = fopen(LOG_FILE, "a");
+    log_file = fopen(LOG_FILE, "ab+");
     if (!log_file) {
+        perror("Error");
         exit(EXIT_FAILURE);
     }
 
@@ -122,4 +122,3 @@ void handle_sigterm(int sig) {
     }
     exit(EXIT_SUCCESS);
 }
-
