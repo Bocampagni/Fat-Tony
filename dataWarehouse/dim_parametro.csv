@@ -1,0 +1,23 @@
+unidade_medida_parametro,tipo_parametro,descritor_parametro,nome_parametro,id_parametro
+mm,absoluto,"precipitação pluviométrica, em milímetros",chuva,1
+mbar,absoluto,"pressão atmosférica, em milibares",pres,2
+w/m2,absoluto,"radiação solar, em watts por metro quadrado",rs,3
+°C,absoluto,"temperatura, em graus Celsius",temp,4
+%,percentual,"umidade relativa do ar, em graus percentuais",ur,5
+°,absoluto,"direção do vento, em graus, a partir do norte geográfico absoluto",dir_vento,6
+m/s,absoluto,"velocidade do vento, em metros por segundo",vel_vento,7
+μg/m^3,absoluto,"concentração de SO2 (dióxido de enxofre), em microgramas por metro cúbico de ar",so2,8
+μg/m^3,absoluto,"concentração de NO2 (dióxido de nitrogênio), em microgramas por metro cúbico de ar",no2,9
+μg/m^3,absoluto,"oncentração de hidrocarbonetos não-metano, em microgramas por metro cúbico de ar",hcnm,10
+μg/m^3,absoluto,"concentração de hidrocarbonetos totais, através do cálculo dos parâmetros HCNM + CH4 = HCT, em microgramas por metro cúbico de ar",hct,11
+μg/m^3,absoluto,"concentração de CH4 (metano), em microgramas por metro cúbico de ar",ch4,12
+ppm,absoluto,"concentração de CO (monóxido de carbono), em partes por milhão",co,13
+μg/m^3,absoluto,"oncentração de NO (monóxido de nitrogênio), em microgramas por metro cúbico de ar",no,14
+μg/m^3,absoluto,"concentração de óxidos de nitrogênio no geral, através do cálculo dos parâmetros NO + NO2 = NOx, em microgramas por metro cúbico de ar",nox,15
+μg/m^3,absoluto,"concentração de O3 (ozônio), em microgramas por metro cúbico de ar",o3,16
+μg/m^3,absoluto,"concentração de materiais particulados com partículas menores que 10 micrômetros (PM10), em microgramas por metro cúbico de ar",pm10,17
+μg/m^3,absoluto,"concentração de materiais particulados com partículas menores que 2,5 micrômetros (PM2,5), em microgramas por metro cúbico de ar",pm2_5,18
+°,absoluto,latitude global da estação de monitoramento que realizou a medição,lat,19
+°,absoluto,longitude global da estação de monitoramento que realizou a medição,lon,20
+m,absoluto,"coordenada X (latitudinal) da estação em UTM, para uso no sistema de georeferenciamento SIRGAS 2000",x_utm_sirgas2000,21
+m,absoluto,"coordenada Y (longitudinal) da estação em UTM, para uso no sistema de georeferenciamento SIRGAS 2000 ",y_utm_sirgas2000,22

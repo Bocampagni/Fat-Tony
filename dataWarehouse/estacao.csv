@@ -1,0 +1,9 @@
+sigla_estacao,zona_cidade,bairro,codnum_estacao
+CA,Zona Central,Centro,3
+AV,Zona Sul,Copacabana,1
+SC,Zona Central,São Cristóvão,7
+SP,Zona Norte,Tijuca,8
+IR,Zona Norte,Irajá,5
+BG,Zona Oeste,Bangu,2
+CG,Zona Oeste,Campo Grande,4
+PG,Zona Oeste,Pedra de Guaratiba,6
